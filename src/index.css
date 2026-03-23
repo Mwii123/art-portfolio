@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Fonts are loaded via index.html ── */
+
+:root {
+  --bg:      #0e0d0b;
+  --surface: #161410;
+  --border:  rgba(255, 255, 255, 0.07);
+  --text:    #e8e2d9;
+  --muted:   #8a8378;
+  --accent:  #c9a96e;
+  --accent2: #e8d5b0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Grain / noise overlay on the whole page */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); opacity: 0.4; }
+
+/* Selection */
+::selection { background: var(--accent); color: var(--bg); }
+
+/* Masonry layout helper */
+.masonry-grid {
+  columns: 3;
+  gap: 1.2rem;
+}
+.masonry-grid > * {
+  break-inside: avoid;
+  margin-bottom: 1.2rem;
+}
+
+@media (max-width: 1024px) { .masonry-grid { columns: 2; } }
+@media (max-width: 640px)  { .masonry-grid { columns: 1; } }
+
+/* Mobile cursor reset */
+@media (max-width: 768px) {
+  body { cursor: auto; }
+}
